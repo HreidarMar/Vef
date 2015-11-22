@@ -1,0 +1,43 @@
+extends layout
+
+block content
+
+          form(name='post', action='/posts', method='post')
+            div(class='form-group', class='col-md-8')
+              label(for='title', hidden='')
+                | Titill:
+              input(type='text', name='title', class='form-control', placeholder='Titill')
+            div(class='form-group', class='col-md-8')
+              label(for='content', hidden='')
+                | Efni:
+              textarea(type='text', name='content', class='form-control', placeholder='Kæra dagbók...', rows='15')
+            div(class='form-group', class='col-md-8')
+              button(class='btn btn-default btn-primary')
+                span.glyphicon.glyphicon-ok
+                | Vista
+
+            if !posts
+              p Engir póstar
+            else
+              table(class='table')
+                thead
+                  tr
+                    td Titill
+                    td Efni
+                    td Skrifað
+                tbody
+                  each post in posts
+                    if post.author == user
+                      tr
+                        td= post.title
+                        td= post.content
+                        td= post.date
+                        td
+                          form(name='delete'
+                            action='/posts/delete/?id='+post.id
+                            method='post')
+                            button(class='btn btn-default btn-warning')
+                              span.glyphicon.glyphicon-remove
+                              | Eyða
+
+                tfoot

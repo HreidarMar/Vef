@@ -1,0 +1,11 @@
+extends layout
+
+block content
+
+	if message
+		h4= message
+
+	if user
+		h4= 'Sæll meistari: ' + user
+	else
+		h4 Vinsamlegast skráðu þig inn til að dagbókina þína
