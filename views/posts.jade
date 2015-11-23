@@ -2,7 +2,6 @@ extends layout
 
 block content
 
-
           form(name='post', action='/posts', method='post')
             div(class='form-group', class='col-md-8')
               label(for='title', hidden='')
@@ -16,7 +15,6 @@ block content
               button(class='btn btn-default btn-primary')
                 span.glyphicon.glyphicon-ok
                 | Vista
-
 
           if !posts
             p Engir póstar

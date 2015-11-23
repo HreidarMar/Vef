@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var data = {title: 'Verkefni 6', user: '', sidebar: 'true'};
+	var data = {title: 'Netdagbókin', user: '', sidebar: 'true'};
 	if(req.session.user) {
 		data.user = req.session.user;
 	}
@@ -16,8 +16,8 @@ router.get('/', function(req, res, next) {
 router.get('/restricted', function(req, res, next) {
 	var data = {};
 
-	data.message = 'Vinsamlegst skráðu þig inn';
-	data.title = 'Verkefni 6';
+	data.message = 'Þú er ekki skráð/ur inn';
+	data.title = 'Netdagbókin';
 	data.sidebar = true;
 
 	res.render('index', data);
