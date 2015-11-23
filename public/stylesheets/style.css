@@ -1,5 +1,22 @@
 body {
-  padding-top: 5%;
   font: 14px "Georgia", Serif, Arial, sans-serif;
   background-color: rgb(167, 158, 158);
+}
+
+@media (min-width: 767px) {
+    #navigation{
+        position: fixed;
+    }
+}
+
+#navigation{
+  height: 100%;
+}
+
+nav{
+  height: 100%;
+}
+
+nav h4{
+  padding-top: 10%;
 }
