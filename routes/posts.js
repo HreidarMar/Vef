@@ -32,8 +32,10 @@ router.post('/', function(req, res, next) {
 	var content = xss(req.body.content);
 	var date = new Date();
 	var username = req.session.user;
+	var words = xss(req.body.wordcount);
+	var chars = xss(req.body.charcount);
 
-	posts.savePost(title, content, date, username, function(error, status) {
+	posts.savePost(title, content, date, username, words, chars, function(error, status) {
 		if(error) {
 			console.error(error);
 		}
