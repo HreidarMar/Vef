@@ -11,13 +11,16 @@ block content
               label(for='content', hidden='')
                 | Efni:
               textarea(type='text', name='content', class='form-control', placeholder='Kæra dagbók...', rows='15')
-            div(class='form-group', class='col-md-8')
+            div(class='form-group', class='col-md-6')
               button(class='btn btn-default btn-primary')
                 span.glyphicon.glyphicon-ok
                 | Vista
-
+            div(class='form-group', class='col-md-4')
+              textarea(type='text', readonly='', class='wordCount form-control', name='wordcount' rows='1')
+              textarea(type='text', readonly='', class='charCount form-control', name='charcount' rows='1')
           if !posts
-            p Engir póstar
+            div(class='col-md-8')
+              p Engir póstar
           else
             table(class='table')
               thead
@@ -25,6 +28,8 @@ block content
                   td Titill
                   td Efni
                   td Skrifað
+                  td Orð
+                  td Stafir
               tbody
                 each post in posts
                   if post.author == user
@@ -32,6 +37,8 @@ block content
                       td= post.title
                       td= post.content
                       td= post.date
+                      td= post.words
+                      td= post.chars
                       td
                         form(name='delete'
                           action='/posts/delete/?id='+post.id
@@ -41,3 +48,70 @@ block content
                             | Eyða
 
               tfoot
+          script.
+            document.addEventListener('DOMContentLoaded',function() {
+              console.log('DOM loaded');
+              textWriter.init();
+            });
+
+            var textWriter = (function() {
+
+              //var select;
+              //var savedContainer;
+              var myForm;
+              var textArea;
+              //var turnText;
+              //var tidyHtml;
+              var wordCount;
+              var charCount;
+
+              function init() {
+                //savedContainer = document.querySelector('.oldEntries-items');
+                //turnText = document.querySelector('button.turntext');
+                wordCount = document.querySelector('.wordCount');
+                charCount = document.querySelector('.charCount');
+                //tidyHtml = document.querySelector('button.tidy');
+                textArea = document.querySelector('textarea');
+
+                textArea.addEventListener('keyup', charCounter);
+                textArea.addEventListener('keyup', wordCounter);
+                //myForm.addEventListener('submit',submitHandler);
+                //myForm.addEventListener('reset', deleter);
+                //tidyHtml.addEventListener('click', tidier);
+                //turnText.addEventListener('click', textReverser);
+
+              }
+
+
+              function charCounter(e) {
+                charCount.textContent = textArea.value.length + ' stafir';
+                if(textArea.value == '') {
+                  wordCount.textContent = '0 stafir';
+                }
+              }
+
+              function wordCounter(e) {
+                var words = textArea.value.replace( /\n/g, " " ).split(' ');
+                wordCount.textContent = words.length - 1 + ' orð';
+                if(textArea.value == '') {
+                  wordCount.textContent = '0 orð';
+                }
+              }
+              /*
+              function textReverser(e) {
+                var text = textArea.value;
+                var textReversed = text.split('').reverse().join('');
+                textArea.value = textReversed;
+                }
+
+                function tidier(e) {
+                var text = textArea.value;
+                var textCleaned = text.replace(/<(?:.|\n)*?>/gm, '');
+                textArea.value = textCleaned;
+                }
+              */
+              return {
+                init: init
+              };
+
+            })();
