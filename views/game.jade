@@ -1,0 +1,38 @@
+extends layout
+
+block content
+
+  body
+    div(style='position: fixed; left: 1050px;')
+      p Use the mouse to shoot and aim
+      p Press P to Pause the game
+      p Press G to change guns
+      p Press W to go into winter mode
+      p The blue ducks are 1 point, the and black ducks are 2 points the red duck is 7 points
+      p Don't shoot the dog! You will be penalized!!
+    #canvas_div_no_cursor
+      canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
+        | Sorry, but your browser does not support the HTML5 canvas tag.
+        audio#Xmas(src='Xmas33.mp3', preload='auto', loop='Yes') Your browser does not support the audio tag.
+        audio#HighScore(src='Applause.mp3', preload='auto') Your browser does not support the audio tag.
+    #output
+    script(src='game/globals.js')
+    script(src='game/consts.js')
+    script(src='game/util.js')
+    script(src='game/keys.js')
+    script(src='game/handleMouse.js')
+    script(src='game/spatialManager.js')
+    script(src='game/entityManager.js')
+    script(src='game/Sprite.js')
+    script(src='game/spriteAnimation.js')
+    script(src='game/Entity.js')
+    script(src='game/Duck.js')
+    script(src='game/Gun.js')
+    script(src='game/Shot.js')
+    script(src='game/update.js')
+    script(src='game/render.js')
+    script(src='game/imagesPreload.js')
+    script(src='game/main.js')
+    script(src='game/DUCKHUNT.js')
+    script(type='text/javascript').
+      document.getElementById('canvas_div_no_cursor').style.cursor = "none";
